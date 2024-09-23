@@ -18,7 +18,7 @@ public class SensorDataController {
 
     @PostMapping("/data")
     public String saveData(@RequestBody SensorData sensorData) {
-        sensorData.setTimestamp(System.currentTimeMillis());
+        sensorData.setFormattedTimestamp(System.currentTimeMillis());
         sensorDataRepository.save(sensorData);
         System.out.println("Received data: " + sensorData);
         return "Data saved successfully";

@@ -1,5 +1,10 @@
 package com.arduino_things.arduino_things.model;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,7 +14,7 @@ public class SensorData {
     private String id;
     private float temperature;
     private float humidity;
-    private long timestamp;
+    private String timestamp;
 
     public SensorData() {
     }
@@ -38,13 +43,18 @@ public class SensorData {
         this.humidity = humidity;
     }
 
-    public long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
+    public void setFormattedTimestamp(long timestamp) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
+        this.timestamp = dateTime.format(formatter);
+    }
     
 }
