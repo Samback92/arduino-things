@@ -1,5 +1,7 @@
 package com.arduino_things.arduino_things.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,7 @@ public class SensorDataController {
 
     @PostMapping("/data")
     public String saveData(@RequestBody SensorData sensorData) {
-        sensorData.setFormattedTimestamp(System.currentTimeMillis());
+        sensorData.setTimestamp(new Date());
         sensorDataRepository.save(sensorData);
         System.out.println("Received data: " + sensorData);
         return "Data saved successfully";
@@ -29,7 +31,7 @@ public class SensorDataController {
         return sensorDataRepository.findById(id).orElse(null);
     }
     
-    @GetMapping
+    @GetMapping("/data")
     public Iterable<SensorData> getAllData() {
         return sensorDataRepository.findAll();
     }
