@@ -9,6 +9,7 @@ import com.arduino_things.arduino_things.model.SensorData;
 import com.arduino_things.arduino_things.repository.SensorDataRepository;
 
 @RestController
+@RequestMapping("/data")
 public class SensorDataController {
 
     @Autowired
@@ -18,7 +19,7 @@ public class SensorDataController {
         this.sensorDataRepository = sensorDataRepository;
     }
 
-    @PostMapping("/data")
+    @PostMapping
     public String saveData(@RequestBody SensorData sensorData) {
         sensorData.setTimestamp(new Date());
         sensorDataRepository.save(sensorData);
@@ -31,7 +32,7 @@ public class SensorDataController {
         return sensorDataRepository.findById(id).orElse(null);
     }
     
-    @GetMapping("/data")
+    @GetMapping
     public Iterable<SensorData> getAllData() {
         return sensorDataRepository.findAll();
     }
