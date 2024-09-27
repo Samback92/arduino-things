@@ -10,6 +10,7 @@ import com.arduino_things.arduino_things.repository.SensorDataRepository;
 
 @RestController
 @RequestMapping("/data")
+@CrossOrigin(origins = "*")
 public class SensorDataController {
 
     @Autowired
