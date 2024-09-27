@@ -1,46 +1,31 @@
 package com.arduino_things.arduino_things.controller;
 
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import com.arduino_things.arduino_things.model.SensorData;
-import com.arduino_things.arduino_things.repository.SensorDataRepository;
+import com.arduino_things.arduino_things.service.SensorDataService;
 
 @RestController
-@RequestMapping("/data")
 @CrossOrigin(origins = "*")
 public class SensorDataController {
 
-    @Autowired
-    private final SensorDataRepository sensorDataRepository;
+    private  SensorDataService sensorDataService;
 
-    public SensorDataController(SensorDataRepository sensorDataRepository) {
-        this.sensorDataRepository = sensorDataRepository;
+    public SensorDataController(SensorDataService sensorDataService) {
+        this.sensorDataService = sensorDataService;
     }
 
-    @PostMapping
-    public String saveData(@RequestBody SensorData sensorData) {
-        sensorData.setTimestamp(new Date());
-        sensorDataRepository.save(sensorData);
+    @PostMapping("/post-data")
+    public SensorData saveData(@RequestBody SensorData sensorData) {
         System.out.println("Received data: " + sensorData);
-        return "Data saved successfully";
-    }
-
-    @GetMapping("/{id}")
-    public SensorData getDataById(@PathVariable String id) {
-        return sensorDataRepository.findById(id).orElse(null);
+        return sensorDataService.saveData(sensorData);
     }
     
-    @GetMapping
-    public Iterable<SensorData> getAllData() {
-        return sensorDataRepository.findAll();
-    }
-    
-    @DeleteMapping("/{id}")
-    public void deleteData(@PathVariable String id) {
-        sensorDataRepository.deleteById(id);
+    @GetMapping("/get-data")
+    public List<SensorData> getAllData() {
+        return sensorDataService.getAllData();
     }
 
 }

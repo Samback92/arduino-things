@@ -1,19 +1,24 @@
 package com.arduino_things.arduino_things.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "sensor_data")
 public class SensorData {
+
     @Id
     private String id;
-    private float temperature;
-    private float humidity;
-    private Date timestamp;
+    private double temperature;
+    private double humidity;
+    private LocalDateTime timestamp;
 
-    public SensorData() {
+    public SensorData(String id, double temperature, double humidity, LocalDateTime timestamp) {
+        this.id = id;
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.timestamp = timestamp;
     }
 
     public String getId() {
@@ -24,27 +29,27 @@ public class SensorData {
         this.id = id;
     }
 
-    public float getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(float temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 
-    public float getHumidity() {
+    public double getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(float humidity) {
+    public void setHumidity(double humidity) {
         this.humidity = humidity;
     }
 
-    public Date getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 }
