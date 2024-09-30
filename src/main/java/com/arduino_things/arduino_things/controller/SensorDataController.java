@@ -28,4 +28,9 @@ public class SensorDataController {
         return sensorDataService.getAllData();
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteData(@PathVariable String id) {
+        System.out.println("Tar bort uppgift med namn: " + id);
+        sensorDataService.deleteData(id);
+    }
 }
