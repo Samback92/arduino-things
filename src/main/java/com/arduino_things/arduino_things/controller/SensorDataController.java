@@ -8,10 +8,9 @@ import com.arduino_things.arduino_things.model.SensorData;
 import com.arduino_things.arduino_things.service.SensorDataService;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class SensorDataController {
 
-    private  SensorDataService sensorDataService;
+    private final SensorDataService sensorDataService;
 
     public SensorDataController(SensorDataService sensorDataService) {
         this.sensorDataService = sensorDataService;
@@ -19,7 +18,7 @@ public class SensorDataController {
 
     @PostMapping("/post-data")
     public SensorData saveData(@RequestBody SensorData sensorData) {
-        System.out.println("Received data: " + sensorData);
+        System.out.println("Mottagen data: " + sensorData);
         return sensorDataService.saveData(sensorData);
     }
     
