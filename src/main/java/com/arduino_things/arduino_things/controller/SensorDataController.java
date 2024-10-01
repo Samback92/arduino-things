@@ -30,7 +30,7 @@ public class SensorDataController {
 
     @DeleteMapping("/{id}")
     public void deleteData(@PathVariable String id) {
-        System.out.println("Tar bort uppgift med namn: " + id);
+        System.out.println("Tar bort uppgift med ID: " + id);
         sensorDataService.deleteData(id);
     }
 }
