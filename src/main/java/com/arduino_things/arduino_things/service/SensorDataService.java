@@ -16,9 +16,7 @@ public class SensorDataService {
     private SensorDataRepository sensorDataRepository;
 
 	public SensorData saveData (SensorData sensorData) {
-		// add two hours to the timestamp
-		LocalDateTime adjustedTimestamp = LocalDateTime.now().plusHours(2);
-		sensorData.setTimestamp(adjustedTimestamp);
+		sensorData.setTimestamp(LocalDateTime.now());
 		return sensorDataRepository.insert(sensorData);
 
 	}
